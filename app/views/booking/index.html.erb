@@ -1,0 +1,10 @@
+<h1>Booking#index</h1>
+<p>Find me in app/views/booking/index.html.erb</p>
+
+<%= @booking.flight.departure_airport.code %>
+<%= @booking.flight.arrival_airport.code %>
+
+<% @booking.passengers.each do |p|%>
+<%= p.name %>
+<%= p.email %>
+<% end %>

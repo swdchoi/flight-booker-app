@@ -1,0 +1,25 @@
+<h1> HELLO </h1>
+
+<%= @chosen.departure_airport.code %>
+<%= @chosen.arrival_airport.code %>
+<%= @chosen.start_date %>
+<%= @chosen.flight_duration %>
+<%= @people %>
+
+<%= form_with model: @booking do |f| %>
+    <%= f.hidden_field :flight_id, value: @chosen.id%>
+        <%= f.fields_for :passengers do |p| %>
+            <div>
+            <%= p.label :name %>
+            <%= p.text_field :name %>
+
+            <%= p.label :email %>
+            <%= p.text_field :email %>
+            </div>
+         <% end %>
+
+    <%= f.submit %>
+
+<% end%>
+
+<%= link_to "back", root_path%>
