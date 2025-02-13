@@ -7,14 +7,14 @@ class BookingController < ApplicationController
   end
 
   def index
-    @booking = Booking.all.first
+    @booking = Booking.find(params[:id])
   end
 
   def create
     @booking = Booking.new(booking_params)
 
     if @booking.save
-      redirect_to index_path
+      redirect_to booking_path(@booking)
     else
       redirect_to root_path
     end

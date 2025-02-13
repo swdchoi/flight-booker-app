@@ -1,69 +1,75 @@
-<h1>SEARCH</h1>
-
+<div class="card m-3">
+<div class="card-header">
+<h1 class="text-center">Search</h1>
+</div>
+<div class="card-body">
 <%= form_with url: "/flights", method: :get do |f|%>
 <div>
-<%= f.label :departure_airport%>
-<%= f.select(:departure_airport, @airports_options, selected: params[:departure_airport])%>
+<%= f.label :departure_airport, class: "form-label"%>
+<%= f.select(:departure_airport, @airports_options, {selected: params[:departure_airport]}, {class: "form-select"})%>
 </div>
 
 <div>
-<%= f.label :arrival_airport%>
-<%= f.select(:arrival_airport, @airports_options2, selected: params[:arrival_airport])%>
+<%= f.label :arrival_airport, class: "form-label"%>
+<%= f.select(:arrival_airport, @airports_options2, {selected: params[:arrival_airport]}, {class: "form-select"})%>
 </div>
 
 <div>
-<%= f.label :passenger%>
-<%= f.select(:passenger, {"1 person" => 1, "2 people" => 2, "3 people" => 3, "4 people" => 4}, selected: params[:passenger])%>
+<%= f.label :passenger, class: "form-label"%>
+<%= f.select(:passenger, {"1 person" => 1, "2 people" => 2, "3 people" => 3, "4 people" => 4}, {selected: params[:passenger]}, {class: "form-select"})%>
 </div>
 
 <div>
-<%= f.label :date%>
-<%= f.select(:start_date, @date_options, selected: params[:start_date])%>
+<%= f.label :date, class: "form-label"%>
+<%= f.select(:start_date, @date_options, {selected: params[:start_date]},{class: "form-select"})%>
 </div>
 
 <div>
-<%= f.submit %>
+<%= f.submit class: "btn btn-primary m-2" %>
 </div>
 
 <% end %>
+</div>
+</div>
 
-<h1>Flights SEARCH</h1>
+<div class="card m-3">
+<div class="card-header">
+<h1 class="text-center">Flights</h1>
+</div>
+<div class="card-body">
 
 <%= form_with url: "/new", method: :get do |n| %>
     <% if @info.first %>
         <% @info.each do |i| %>
+            <div class="m-3">
             <%= n.radio_button :flight, i.id %>
-
-            <div>
+            <strong>Departure:</strong>
             <%= i.departure_airport.code %>
-            </div>
-
-            <div>
+            <strong>Arrival:</strong>
             <%= i.arrival_airport.code %>
-            </div>
-
-            <div>
+            <strong>Date:</strong>
             <%= i.start_date %>
             </div>
-
         <% end %>
         
-            <div>
-            Number of passengers: <%= @people%> 
+            <div class="m-3">
+            Number of passengers: <strong><%= @people%></strong>
             </div>
 
             <%= n.hidden_field :passengers, value: @people %>
 
         <div>
-        <%= n.submit %>
+        <%= n.submit class:"btn btn-primary m-2" %>
         </div>
 
-        <%= link_to "back", root_path%>
+        <%= link_to "back", root_path, class:"btn btn-secondary m-2"%>
     <% else %>
 
         <h1> No Flights Exist </h1>
-        <%= link_to "back", root_path %>
+        <%= link_to "back", root_path, class:"btn btn-secondary m-1" %>
 
     <% end %>
 
  <% end %>
+</div>
+</div>

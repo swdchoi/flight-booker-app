@@ -1,25 +1,39 @@
-<h1> HELLO </h1>
-
+<div class="card m-3">
+<div class="card-header">
+<h1 class="text-center">Booking</h1>
+</div>
+<div class="card-body">
+<div class="m-2">
+<strong>Departure:</strong>
 <%= @chosen.departure_airport.code %>
+<strong>Arrival:</strong>
 <%= @chosen.arrival_airport.code %>
+<strong>Date:</strong>
 <%= @chosen.start_date %>
+</div>
+<strong class="m-2">Flight Duration:</strong>
 <%= @chosen.flight_duration %>
-<%= @people %>
+<div class="m-2"><strong>Number of Passengers: </strong><%= @people %></div>
+
 
 <%= form_with model: @booking do |f| %>
     <%= f.hidden_field :flight_id, value: @chosen.id%>
         <%= f.fields_for :passengers do |p| %>
-            <div>
-            <%= p.label :name %>
-            <%= p.text_field :name %>
-
-            <%= p.label :email %>
-            <%= p.text_field :email %>
+            <div class="m-2">
+            <%= p.label :name, class: "form-label" %>
+            <%= p.text_field :name, class: "form-control" %>
+            </div>
+            <div class="m-2">
+            <%= p.label :email, class: "form-label" %>
+            <%= p.text_field :email, class: "form-control" %>
             </div>
          <% end %>
 
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary m-2" %>
 
 <% end%>
 
-<%= link_to "back", root_path%>
+<%= link_to "back", root_path, class: "btn btn-secondary m-2"%>
+
+</div>
+</div>
