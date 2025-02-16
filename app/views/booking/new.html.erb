@@ -15,10 +15,16 @@
 <%= @chosen.flight_duration %>
 <div class="m-2"><strong>Number of Passengers: </strong><%= @people %></div>
 
-
+<div data-controller="passenger">
 <%= form_with model: @booking do |f| %>
     <%= f.hidden_field :flight_id, value: @chosen.id%>
+        <div data-passenger-target="container">
         <%= f.fields_for :passengers do |p| %>
+            <div class="card m-3">
+            <div class="card-header">
+                <h5>Passenger</h5>
+            </div>
+            <div class="card-body">
             <div class="m-2">
             <%= p.label :name, class: "form-label" %>
             <%= p.text_field :name, class: "form-control" %>
@@ -27,11 +33,43 @@
             <%= p.label :email, class: "form-label" %>
             <%= p.text_field :email, class: "form-control" %>
             </div>
+            <div>
+                <button data-action="click->passenger#remove" class="btn btn-danger m-2">Remove</button>
+            </div>
+            </div>
+            </div>
+            
          <% end %>
+         </div>
 
+    <button type="button" data-action="click->passenger#create" class="btn btn-success m-2">Create</button>
+    
     <%= f.submit class: "btn btn-primary m-2" %>
 
+    <template data-passenger-target="template">
+        <%= f.fields_for :passengers do |p| %>
+        <div class="card m-3">
+            <div class="card-header">
+                <h5>Passenger</h5>
+            </div>
+            <div class="card-body">
+            <div class="m-2">
+            <%= p.label :name, class: "form-label" %>
+            <%= p.text_field :name, class: "form-control" %>
+            </div>
+            <div class="m-2">
+            <%= p.label :email, class: "form-label" %>
+            <%= p.text_field :email, class: "form-control" %>
+            </div>
+            <div>
+                <button data-action="click->passenger#remove" class="btn btn-danger m-2">Remove</button>
+            </div>
+            </div>
+            </div>
+    </template>
+    <% end %>
 <% end%>
+</div>
 
 <%= link_to "back", root_path, class: "btn btn-secondary m-2"%>
 
